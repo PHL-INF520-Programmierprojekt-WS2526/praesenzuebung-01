@@ -17,3 +17,10 @@ dependencies {
 tasks.test {
     useJUnitPlatform()
 }
+
+// set Java to 8 for compatibility with GitHub Classroom Autograding
+java {
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(8))
+    }
+}
