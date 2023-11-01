@@ -16,10 +16,14 @@
 
 	"customizations": {
 		"vscode": {
-			"extensions": ["github.classroom", "ms-vsliveshare.vsliveshare"]
+			"extensions": [
+				"github.classroom"
+			],
+			"settings": {
+				"java.server.launchMode": "Standard"
+			}
 		}
 	}
-
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// "forwardPorts": [],
