@@ -131,7 +131,7 @@ public class TestUtils {
      * @param fieldName
      * @param fieldType
      */
-    public static void assertClassHasFieldOfType(Class clazz, String fieldName, Class fieldType) {
+    public static void assertClassHasFieldOfType(Class<?> clazz, String fieldName, Class<?> fieldType) {
         Field[] fields = clazz.getDeclaredFields();
 
         for (Field field : fields) {
@@ -150,19 +150,19 @@ public class TestUtils {
      * @param clazz
      * @param expectedFieldsMap
      */
-    public static void assertClassHasFieldsOfType(Class clazz, Map<String, Class> expectedFieldsMap) {
+    public static void assertClassHasFieldsOfType(Class<?> clazz, Map<String, Class<?>> expectedFieldsMap) {
         Field[] fields = clazz.getDeclaredFields();
-        Map<String, Class> fieldsMap = new HashMap<>();
+        Map<String, Class<?>> fieldsMap = new HashMap<>();
         for (Field field : fields) {
             fieldsMap.put(field.getName().toLowerCase(), field.getType());
         }
 
-        for (Map.Entry<String, Class> stringClassEntry : expectedFieldsMap.entrySet()) {
+        for (Map.Entry<String, Class<?>> stringClassEntry : expectedFieldsMap.entrySet()) {
             assertTrue(fieldsMap.containsKey(stringClassEntry.getKey().toLowerCase()),
                     String.format("The field '%s' of the class '%s' does not exist.", stringClassEntry.getKey(),
                             clazz.getSimpleName()));
 
-            Class type = fieldsMap.get(stringClassEntry.getKey().toLowerCase());
+            Class<?> type = fieldsMap.get(stringClassEntry.getKey().toLowerCase());
             assertTrue(type.isAssignableFrom(stringClassEntry.getValue()),
                     String.format("The field '%s' of the class '%s' has the wrong type. The type '%s' was expected, but it was '%s'.", stringClassEntry.getKey(),
                             clazz.getSimpleName(), stringClassEntry.getValue(), type.getSimpleName()));
@@ -177,7 +177,7 @@ public class TestUtils {
      * @param returnType
      * @param parameterTypes
      */
-    public static void assertClassHasMethod(Class clazz, String methodName, Class<?> returnType, Class<?>... parameterTypes) {
+    public static void assertClassHasMethod(Class<?> clazz, String methodName, Class<?> returnType, Class<?>... parameterTypes) {
         for (Method declaredMethod : clazz.getDeclaredMethods()) {
             if (declaredMethod.getName().equals(methodName)) {
                 assertTrue(returnType.isAssignableFrom(declaredMethod.getReturnType()),
@@ -210,7 +210,7 @@ public class TestUtils {
      * @param parameterTypes
      * @return
      */
-    public static Method getMethod(Class clazz, String methodName, Class<?>... parameterTypes) {
+    public static Method getMethod(Class<?> clazz, String methodName, Class<?>... parameterTypes) {
         Method method = null;
         try {
             if (parameterTypes == null || parameterTypes.length == 0) {
@@ -233,7 +233,7 @@ public class TestUtils {
      * @param fieldName
      * @return
      */
-    public static Field getField(Class clazz, String fieldName) {
+    public static Field getField(Class<?> clazz, String fieldName) {
         Field field = null;
         try {
             field = clazz.getDeclaredField(fieldName);
