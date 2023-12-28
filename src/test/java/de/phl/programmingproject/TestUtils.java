@@ -159,15 +159,15 @@ public class TestUtils {
             fieldsMap.put(field.getName().toLowerCase(), field.getType());
         }
 
-        for (Map.Entry<String, Class<?>> stringClassEntry : expectedFieldsMap.entrySet()) {
-            assertTrue(fieldsMap.containsKey(stringClassEntry.getKey().toLowerCase()),
-                    String.format("The field '%s' of the class '%s' does not exist.", stringClassEntry.getKey(),
+        for (Map.Entry<String, Class<?>> expectedClassEntry : expectedFieldsMap.entrySet()) {
+            assertTrue(fieldsMap.containsKey(expectedClassEntry.getKey().toLowerCase()),
+                    String.format("The field '%s' of the class '%s' does not exist.", expectedClassEntry.getKey(),
                             clazz.getSimpleName()));
 
-            Class<?> type = fieldsMap.get(stringClassEntry.getKey().toLowerCase());
-            assertTrue(type.isAssignableFrom(stringClassEntry.getValue()),
-                    String.format("The field '%s' of the class '%s' has the wrong type. The type '%s' was expected, but it was '%s'.", stringClassEntry.getKey(),
-                            clazz.getSimpleName(), stringClassEntry.getValue(), type.getSimpleName()));
+            Class<?> actualType = fieldsMap.get(expectedClassEntry.getKey().toLowerCase());
+            assertTrue(expectedClassEntry.getValue().isAssignableFrom(actualType),
+                    String.format("The field '%s' of the class '%s' has the wrong type. The type '%s' was expected, but it was '%s'.", expectedClassEntry.getKey(),
+                            clazz.getSimpleName(), expectedClassEntry.getValue(), actualType.getSimpleName()));
         }
     }
 
@@ -249,7 +249,7 @@ public class TestUtils {
         try {
             return method.invoke(object, args);
         } catch (Exception e) {
-            System.err.println(e);
+            e.printStackTrace();
             fail(String.format("Could not invoke method '%s' of class '%s' with arguments '%s'", methodName, clazz.getSimpleName(), Arrays.toString(args)));
         }
         return null;
