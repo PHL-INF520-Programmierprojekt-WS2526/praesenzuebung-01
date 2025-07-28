@@ -17,23 +17,16 @@
 	"customizations": {
 		"vscode": {
 			"extensions": [
-				"github.classroom"
+				"github.classroom",
+				"mermaidchart.vscode-mermaid-chart",
+				"yzhang.markdown-all-in-one"
 			],
 			"settings": {
-				"java.server.launchMode": "Standard"
+				"java.server.launchMode": "Standard",
+				"git.autofetch": true,
+				"git.autofetchPeriod": 300,
+				"git.postCommitCommand": "sync"
 			}
 		}
 	}
-
-	// Use 'forwardPorts' to make a list of ports inside the container available locally.
-	// "forwardPorts": [],
-
-	// Use 'postCreateCommand' to run commands after the container is created.
-	// "postCreateCommand": "java -version",
-
-	// Configure tool-specific properties.
-	// "customizations": {},
-
-	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
-	// "remoteUser": "root"
 }
