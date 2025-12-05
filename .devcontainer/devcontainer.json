@@ -16,7 +16,6 @@
 	"customizations": {
 		"vscode": {
 			"extensions": [
-				"github.classroom",
 				"oracle.oracle-java",
 				"mermaidchart.vscode-mermaid-chart",
 				"yzhang.markdown-all-in-one",
@@ -27,11 +26,22 @@
 				"git.autofetch": true,
 				"git.autofetchPeriod": 300,
 				"git.postCommitCommand": "sync",
-				// point to the Java 21 JDK installed in the container, so it does not look for a JDK installed by SDKMAN (which is not installed in this container due to "version":"none" in "ghcr.io/devcontainers/features/java:1")
-				// an alternative to make gradle still work, is specifying the JDK in SDKMAN, e.g., "version":"21" or "version":"latest", and then use that JDK version.
 				"java.jdt.ls.home": "/usr/local/openjdk-21",
-				"java.import.gradle.java.home": "/usr/local/openjdk-21"
+				"java.import.gradle.java.home": "/usr/local/openjdk-21",
+				// disable Copilot and other AI chat
+				"chat.disableAIFeatures": true,
+				"github.copilot.enable": { "*": false },
+				"github.copilot.editor.enableAutoCompletions": false,
+				"github.copilot.editor.enableCodeActions": false,
+				"github.copilot.nextEditSuggestions.enabled": false,
+				"github.copilot.renameSuggestions.triggerAutomatically": false,				
+				"github.copilot.chat.enabled": false,
+				"workbench.panel.chat.hidden": true,
+				"chat.extensionUnification.enabled": false
 			}
 		}
-	}
+	},
+	"onCreateCommand": "code --uninstall-extension github.copilot-chat || true",
+	"postAttachCommand": "code --uninstall-extension github.copilot-chat || true"
+
 }
